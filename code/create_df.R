@@ -8,7 +8,6 @@ df <- read_csv("data/f_cgm_data_2025-08-08.csv", skip = 1) |>
          device=Dispositivo) |>
   select(device, time, mgdL) |>
   tail(-6) |>
-  mutate(time=as.POSIXct(time, format="%d/%m/%Y %H:%M:%S", tz="UTC"))
-ds <- df |>
-  mutate(time=as.POSIXct(time, format = "%d-%m-%Y %H:%M"))
-ds 
+  mutate(time=as.POSIXct(time, format = "%d-%m-%Y %H:%M"),
+         day=as.Date(time)) |>
+  arrange(desc(time))
